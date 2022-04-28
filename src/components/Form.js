@@ -1,28 +1,34 @@
 /** @format */
 
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 
 const Form = ({ addNewColor = f => f }) => {
-	//create the ref
-	const titleRef = useRef(null);
-	const hrefColorRef = useRef(null);
-	const runOnSubmit = event => {
-		event.preventDefault();
-		const colorTitle = titleRef.current.value;
-		const hexValue = hrefColorRef.current.value;
-		//set the color to be the the current values on submit
-        //gaurd clause for empty
-		if (!colorTitle) return;
-		addNewColor(hexValue, colorTitle);
-		console.log(event);
+	const [hexColor, setHexColor] = useState('#000000');
+	const [colorTitle, setColorTitle] = useState('black');
+
+	//create a function to run on change
+	const handleTitleChange = e => {
+		//set tthe title to be the current title
+		setColorTitle(e.target.value);
 	};
+	const handleColorChange = e => {
+		setHexColor(e.target.value);
+	};
+
+	const runOnSubmit = e => {
+		e.preventDefault();
+		//add the colors to the array
+		addNewColor(hexColor, colorTitle);
+	};
+
 	return (
 		<div className='container'>
 			<form action='/signin' method='post' onSubmit={runOnSubmit}>
 				<label htmlFor='colorTitle'>
 					Color Title:
 					<input
-						ref={titleRef}
+						onChange={handleTitleChange}
+						value={colorTitle}
 						type='text'
 						name='colorTitle'
 						id='colorTitle'
@@ -33,7 +39,8 @@ const Form = ({ addNewColor = f => f }) => {
 				<label htmlFor='colorHex'>
 					Choose color:
 					<input
-						ref={hrefColorRef}
+						onChange={handleColorChange}
+						value={hexColor}
 						type='color'
 						name='colorHex'
 						id='colorHex'

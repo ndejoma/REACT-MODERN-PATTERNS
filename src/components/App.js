@@ -11,7 +11,7 @@ const App = ({ title = 'My App' }) => {
 		const currentColors = colors;
 		currentColors.push({ colorTitle: hex, title });
 		//set the currentColor
-		console.log(colors);
+		console.log(new Set(colors));
 		setColors(currentColors);
 	};
 	return (
