@@ -1,24 +1,22 @@
 /** @format */
 
-import React, { useState } from 'react';
+import React from 'react';
+import useInput from '../hooks/useInput';
 
 const Form = ({ addNewColor = f => f }) => {
-	const [hexColor, setHexColor] = useState('#000000');
-	const [colorTitle, setColorTitle] = useState('black');
+	const [hexProps, resetHexColor] = useInput('#111212');
+	const [titleProps, resetTitle] = useInput('black');
 
-	//create a function to run on change
-	const handleTitleChange = e => {
-		//set tthe title to be the current title
-		setColorTitle(e.target.value);
-	};
-	const handleColorChange = e => {
-		setHexColor(e.target.value);
-	};
+	console.log(hexProps, titleProps);
 
 	const runOnSubmit = e => {
 		e.preventDefault();
-		//add the colors to the array
-		addNewColor(hexColor, colorTitle);
+		//add the colors
+		const hexValue = hexProps.value;
+		const titleValue = titleProps.value;
+		//add the new color and the title
+		console.log(hexValue, titleValue);	
+		addNewColor(hexValue, titleValue);
 	};
 
 	return (
@@ -27,8 +25,7 @@ const Form = ({ addNewColor = f => f }) => {
 				<label htmlFor='colorTitle'>
 					Color Title:
 					<input
-						onChange={handleTitleChange}
-						value={colorTitle}
+						{...titleProps}
 						type='text'
 						name='colorTitle'
 						id='colorTitle'
@@ -39,8 +36,7 @@ const Form = ({ addNewColor = f => f }) => {
 				<label htmlFor='colorHex'>
 					Choose color:
 					<input
-						onChange={handleColorChange}
-						value={hexColor}
+						{...hexProps}
 						type='color'
 						name='colorHex'
 						id='colorHex'
