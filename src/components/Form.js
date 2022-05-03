@@ -1,22 +1,21 @@
 /** @format */
 
-import React from 'react';
+import React, { useContext } from 'react';
 import useInput from '../hooks/useInput';
+import { ColorsContext } from './ColorsProvider';
 
-const Form = ({ addNewColor = f => f }) => {
+const Form = () => {
 	const [hexProps, resetHexColor] = useInput('#111212');
 	const [titleProps, resetTitle] = useInput('black');
-
-	console.log(hexProps, titleProps);
+	const { addNewColor } = useContext(ColorsContext);
 
 	const runOnSubmit = e => {
 		e.preventDefault();
 		//add the colors
 		const hexValue = hexProps.value;
 		const titleValue = titleProps.value;
-		//add the new color and the title
-		console.log(hexValue, titleValue);	
-		addNewColor(hexValue, titleValue);
+
+		addNewColor(titleValue, hexValue);
 	};
 
 	return (

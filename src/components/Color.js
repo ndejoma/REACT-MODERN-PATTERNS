@@ -1,8 +1,9 @@
 /** @format */
 
-import React from 'react';
+import React, { useContext } from 'react';
 import StarRating from './StarRating';
 import { FaTimes } from 'react-icons/fa';
+import { ColorsContext } from './ColorsProvider';
 
 //create an object for the Fatime styles
 const closeStyles = {
@@ -20,14 +21,17 @@ const btnStyles = {
 	border: 'none',
 	backgroundColor: 'transparent'
 };
-const Color = ({
-	title,
-	color,
-	rating,
-}) => {
+const Color = ({ title, color, rating, id }) => {
+	//get the remove colors function from the ColorsContext
+	const { removeColor, rateColor } = useContext(ColorsContext);
+	//create a function to handle click
+	const getRating = rating => {
+		rateColor(id, rating);
+	};
 	return (
 		<section className='color' style={{ position: 'relative' }}>
 			<button
+				onClick={() => removeColor(id)}
 				className='btn'
 				style={{ ...btnStyles }}>
 				<FaTimes style={{ ...closeStyles }} />
@@ -37,7 +41,7 @@ const Color = ({
 			<div
 				className='color-div'
 				style={{ height: '300px', backgroundColor: color }}></div>
-			<StarRating selectedStars={rating} />
+			<StarRating selectedStars={rating} getRating={getRating} />
 		</section>
 	);
 };

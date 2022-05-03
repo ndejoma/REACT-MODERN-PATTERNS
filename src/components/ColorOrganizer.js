@@ -2,18 +2,20 @@
 
 import React, { createContext } from 'react';
 import ColorsList from './ColorLists';
-import colors from '../data/colordata.json';
+import Form from './Form';
+import ColorsProvider from './ColorsProvider';
 
 export const ColorsContext = createContext();
 
 const ColorOrganizer = () => {
 	return (
-		<ColorsContext.Provider value={colors}>
+		<ColorsProvider>
 			<main>
+				<Form />
 				<h1>Colors organized</h1>
 				<ColorsList />
 			</main>
-		</ColorsContext.Provider>
+		</ColorsProvider>
 	);
 };
 
