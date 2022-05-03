@@ -21,17 +21,13 @@ const btnStyles = {
 	backgroundColor: 'transparent'
 };
 const Color = ({
-	id,
 	title,
 	color,
 	rating,
-	onRemove = f => console.log('Color removed', f),
-	onRateColor = f => f
 }) => {
 	return (
 		<section className='color' style={{ position: 'relative' }}>
 			<button
-				onClick={() => onRemove(id)}
 				className='btn'
 				style={{ ...btnStyles }}>
 				<FaTimes style={{ ...closeStyles }} />
@@ -41,7 +37,7 @@ const Color = ({
 			<div
 				className='color-div'
 				style={{ height: '300px', backgroundColor: color }}></div>
-			<StarRating selectedStars={rating} onRate={rating => onRateColor(id, rating)} />
+			<StarRating selectedStars={rating} />
 		</section>
 	);
 };
