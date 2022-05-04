@@ -1,13 +1,13 @@
 /** @format */
 
-import React, { useContext } from 'react';
+import React from 'react';
 import Color from './Color';
-import { ColorsContext } from './ColorsProvider';
+import { useColors } from '../hooks/useColors';
 
 const ColorLists = () => {
 	//get the colors from the context provider object
-	const {colors} = useContext(ColorsContext);
-	console.log( ColorsContext );
+	const { colors } = useColors();
+
 
 	//if there are no colors to show, the length is 0
 	if (!colors.length)

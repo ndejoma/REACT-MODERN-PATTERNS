@@ -1,9 +1,9 @@
 /** @format */
 
-import React, { useContext } from 'react';
+import React from 'react';
 import StarRating from './StarRating';
 import { FaTimes } from 'react-icons/fa';
-import { ColorsContext } from './ColorsProvider';
+import { useColors } from '../hooks/useColors';
 
 //create an object for the Fatime styles
 const closeStyles = {
@@ -23,7 +23,7 @@ const btnStyles = {
 };
 const Color = ({ title, color, rating, id }) => {
 	//get the remove colors function from the ColorsContext
-	const { removeColor, rateColor } = useContext(ColorsContext);
+	const { removeColor, rateColor } = useColors();
 	//create a function to handle click
 	const getRating = rating => {
 		rateColor(id, rating);

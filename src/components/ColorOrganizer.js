@@ -3,7 +3,7 @@
 import React, { createContext } from 'react';
 import ColorsList from './ColorLists';
 import Form from './Form';
-import ColorsProvider from './ColorsProvider';
+import {ColorsProvider} from '../hooks/useColors';
 
 export const ColorsContext = createContext();
 
